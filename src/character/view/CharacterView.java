@@ -8,7 +8,7 @@ public class CharacterView
 	
 	public CharacterView()
 	{
-		windowTitle = "Major & Status \"Differentiator\" 3000";
+		windowTitle = "Major & Status Translator 3000";
 	}
 	
 	/**

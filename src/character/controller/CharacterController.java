@@ -17,28 +17,24 @@ public class CharacterController
 	public CharacterController()
 	{
 		myDisplay = new CharacterView();
-		myMS = new MajorStatus();
+		String twoCharacters = myDisplay.characterInput("Please enter your 2 characters (A letter & a number) to continue...");
+		myMS = new MajorStatus(twoCharacters);
 	}
 	
 	public void start()
 	{
-		myDisplay.characterInput("Please enter your 2 characters (A letter & number) to continue...");
+		myDisplay.showMessage("Translation: " + myMS.getTranslation());
 	}
 	
-	public String userToCheckers(String characterText)
+	public String processCharacters(String characterText)
 	{
 		String response = "";
-		if (myMS.quitChecker(characterText))
-		{
-			shutDown();
-		}
-		response = myMS.processCharacters(characterText);
+		response = myMS.compileCharacters(characterText);
 		return response;
 	}
 	
-	private void shutDown()
+	public void handleErrors(String errorMessage)
 	{
-		myDisplay.showMessage("Now shutting down...");
-		System.exit(0);
+		myDisplay.showMessage(errorMessage);
 	}
 }

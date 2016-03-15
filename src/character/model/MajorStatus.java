@@ -2,8 +2,6 @@ package character.model;
 
 import java.util.ArrayList;
 
-import character.view.CharacterView;
-
 /**
  * MajorStatus Model class
  * @author Deigen Villalobos
@@ -14,15 +12,18 @@ public class MajorStatus
 {
 	private ArrayList<String> MajorList;
 	private ArrayList<String> StatusList;
-	private CharacterView myDisplay;
 	private String major = "";
 	private String status = "";
+	private String twoCharacters;
+	public String translation;
 	
-	public MajorStatus()
+	
+	public MajorStatus(String twoCharacters)
 	{
 		this.MajorList = new ArrayList<String>();
 		this.StatusList = new ArrayList<String>();
-		myDisplay = new CharacterView();
+		this.twoCharacters = twoCharacters;
+		
 		buildMajorList();
 		buildStatusList();
 	}
@@ -49,75 +50,87 @@ public class MajorStatus
 		this.StatusList.add("4Senior");
 	}	
 	
-	public String majorChecker(String characterInput)
+	public String majorChecker(String twoCharacters)
 	{
-		if (characterInput != null && characterInput.length() == 2)
+		if (twoCharacters != null && twoCharacters.length() == 2)
 		{
 			for (String currentMajor : MajorList)
 			{
-				if (characterInput.toLowerCase().contains(currentMajor.substring(0, 0).toLowerCase()))
+				if (twoCharacters.toLowerCase().contains(currentMajor.substring(0, 0).toLowerCase()))
 				{
 					major = currentMajor;
 				}
 			}
 		}
-		else
-		{
-			myDisplay.showMessage("Error 0001: String must be 2 characters long");
-		}
 		return major;
 		
 	}
 	
-	public String statusChecker(String characterInput)
+	public String statusChecker(String twoCharacters)
 	{
-		if (characterInput != null && characterInput.length() == 2)
+		if (twoCharacters != null && twoCharacters.length() == 2)
 		{
 			for (String currentStatus : StatusList)
 			{
-				if (characterInput.contains(currentStatus.substring(0, 0)))
+				if (twoCharacters.contains(currentStatus.substring(0, 0)))
 				{
 					status = currentStatus.substring(1, currentStatus.length());
 				}
 			}
 		}
-		else
-		{
-			myDisplay.showMessage("Error 0001: String must be 2 characters long");
-		}
 		return status;
-		
 	}
 	
-	public String processCharacters(String characterInput)
+	public String compileCharacters(String twoCharacters)
 	{
-		String output = "";
+		majorChecker(twoCharacters);
+		statusChecker(twoCharacters);
 		if (major != null && status != null)
 		{
-			output = major + " " + status;
+			translation = major + " " + status;
 		}
-		return output;
+		return translation;
 	}
 	
-	public boolean quitChecker(String characterInput)
-	{
-		boolean hasQuit = false;
-		
-		if (characterInput.toLowerCase().equals("quit"))
-		{
-			hasQuit = true;
-		}
-		
-		return hasQuit;
-	}
+	//Getters and Setters
 	
 	public ArrayList<String> getMajorList()
 	{
 		return MajorList;
 	}
-	
+
+	public void setMajorList(ArrayList<String> majorList)
+	{
+		MajorList = majorList;
+	}
+
 	public ArrayList<String> getStatusList()
-	{		
+	{
 		return StatusList;
+	}
+
+	public void setStatusList(ArrayList<String> statusList)
+	{
+		StatusList = statusList;
+	}
+
+	public String getTranslation()
+	{
+		return translation;
+	}
+
+	public void setTranslation(String translation)
+	{
+		this.translation = translation;
+	}
+
+	public String getTwoCharacters()
+	{
+		return twoCharacters;
+	}
+
+	public void setTwoCharacters(String twoCharacters)
+	{
+		this.twoCharacters = twoCharacters;
 	}
 }

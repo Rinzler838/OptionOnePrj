@@ -2,6 +2,11 @@ package character.view;
 
 import javax.swing.JOptionPane;
 
+/**
+ * View class that allows for different window types
+ * @author dvil4688
+ * @version 1.1 3/14/16 Added code for windows
+ */
 public class CharacterView
 {
 	private String windowTitle;

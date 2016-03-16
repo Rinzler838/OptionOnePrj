@@ -5,78 +5,93 @@ import java.util.ArrayList;
 /**
  * MajorStatus Model class
  * @author Deigen Villalobos
- * @version 1.7 Added checker methods        
+ * @version 1.9 3/15/16 Fixed code in for loops.
  */
 
 public class MajorStatus
 {
-	private ArrayList<String> MajorList;
-	private ArrayList<String> StatusList;
-	private String major = "";
-	private String status = "";
+	private ArrayList<String> majorList;
+	private ArrayList<String> statusList;
+	private String major;
+	private String status;
 	private String twoCharacters;
 	public String translation;
 	
 	
 	public MajorStatus(String twoCharacters)
 	{
-		this.MajorList = new ArrayList<String>();
-		this.StatusList = new ArrayList<String>();
+		this.majorList = new ArrayList<String>();
+		this.statusList = new ArrayList<String>();
 		this.twoCharacters = twoCharacters;
-		
+
 		buildMajorList();
 		buildStatusList();
 	}
 	
 	private void buildMajorList()
 	{
-		this.MajorList.add("Administration of IT");
-		this.MajorList.add("Network Secutiry");
-		this.MajorList.add("Multimedia Management");
-		this.MajorList.add("Telecommunications");
-		this.MajorList.add("Computer Graphics");
-		this.MajorList.add("Artificial Intelligence");
-		this.MajorList.add("Web Page Design");
-		this.MajorList.add("Software Engineer");
-		this.MajorList.add("Desktop Publishing");
-		this.MajorList.add("Information Technology");
+		this.majorList.add("Administration of IT-");
+		this.majorList.add("Network Secutiry-");
+		this.majorList.add("Multimedia Management-");
+		this.majorList.add("Telecommunications-");
+		this.majorList.add("Computer Graphics-");
+		this.majorList.add("Artificial Intelligence-");
+		this.majorList.add("Web Page Design-");
+		this.majorList.add("Software Engineer-");
+		this.majorList.add("Desktop Publishing-");
+		this.majorList.add("Information Technology-");
 	}
 	
 	private void buildStatusList()
 	{
-		this.StatusList.add("1Freshman");
-		this.StatusList.add("2Sophmore");
-		this.StatusList.add("3Junior");
-		this.StatusList.add("4Senior");
+		this.statusList.add("1Freshman");
+		this.statusList.add("2Sophmore");
+		this.statusList.add("3Junior");
+		this.statusList.add("4Senior");
 	}	
 	
 	public String majorChecker(String twoCharacters)
 	{
-		if (twoCharacters != null && twoCharacters.length() == 2)
+		if (twoCharacters.length() == 2)
 		{
-			for (String currentMajor : MajorList)
+			for (int currentMajor = 0; currentMajor < majorList.size(); currentMajor++)
 			{
-				if (twoCharacters.toLowerCase().contains(currentMajor.substring(0, 0).toLowerCase()))
+				if (twoCharacters.contains(majorList.get(currentMajor).substring(0, 0)))
 				{
-					major = currentMajor;
+					major = majorList.get(currentMajor);
+				}
+				else
+				{
+					major = "(Non-real Character";
 				}
 			}
 		}
+		else
+		{
+			major = "(Non-real Entry";
+		}
 		return major;
-		
 	}
 	
 	public String statusChecker(String twoCharacters)
 	{
-		if (twoCharacters != null && twoCharacters.length() == 2)
+		if (twoCharacters.length() == 2)
 		{
-			for (String currentStatus : StatusList)
+			for (int currentStatus = 0; currentStatus < statusList.size(); currentStatus++)
 			{
-				if (twoCharacters.contains(currentStatus.substring(0, 0)))
+				if (twoCharacters.contains(statusList.get(currentStatus).substring(0, 0)))
 				{
-					status = currentStatus.substring(1, currentStatus.length());
+					status = statusList.get(currentStatus).substring(1, statusList.get(currentStatus).length());
+				}
+				else
+				{
+					status = " - Please Try Again)";
 				}
 			}
+		}
+		else
+		{
+			status = " - Please Try Again)";
 		}
 		return status;
 	}
@@ -85,52 +100,20 @@ public class MajorStatus
 	{
 		majorChecker(twoCharacters);
 		statusChecker(twoCharacters);
+		
 		if (major != null && status != null)
 		{
-			translation = major + " " + status;
+			translation = major + status;
 		}
 		return translation;
-	}
-	
-	//Getters and Setters
-	
-	public ArrayList<String> getMajorList()
-	{
-		return MajorList;
-	}
-
-	public void setMajorList(ArrayList<String> majorList)
-	{
-		MajorList = majorList;
-	}
-
-	public ArrayList<String> getStatusList()
-	{
-		return StatusList;
-	}
-
-	public void setStatusList(ArrayList<String> statusList)
-	{
-		StatusList = statusList;
 	}
 
 	public String getTranslation()
 	{
+		majorChecker(twoCharacters);
+		statusChecker(twoCharacters);
+		compileCharacters(twoCharacters);
 		return translation;
 	}
+}	
 
-	public void setTranslation(String translation)
-	{
-		this.translation = translation;
-	}
-
-	public String getTwoCharacters()
-	{
-		return twoCharacters;
-	}
-
-	public void setTwoCharacters(String twoCharacters)
-	{
-		this.twoCharacters = twoCharacters;
-	}
-}

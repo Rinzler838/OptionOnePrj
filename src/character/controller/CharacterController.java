@@ -6,7 +6,7 @@ import character.view.*;
 /**
  * Application controller for the OptionOne project.
  * @author Deigen Villalobos
- * @version 1.3 3/7/16 Added code to start() method
+ * @version 1.4 3/14/16 Deleted unnecessary code
  */
 
 public class CharacterController
@@ -24,17 +24,5 @@ public class CharacterController
 	public void start()
 	{
 		myDisplay.showMessage("Translation: " + myMS.getTranslation());
-	}
-	
-	public String processCharacters(String characterText)
-	{
-		String response = "";
-		response = myMS.compileCharacters(characterText);
-		return response;
-	}
-	
-	public void handleErrors(String errorMessage)
-	{
-		myDisplay.showMessage(errorMessage);
 	}
 }
